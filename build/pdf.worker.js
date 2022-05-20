@@ -117,7 +117,7 @@ class WorkerMessageHandler {
     const WorkerTasks = [];
     const verbosity = (0, _util.getVerbosityLevel)();
     const apiVersion = docParams.apiVersion;
-    const workerVersion = '2.14.305';
+    const workerVersion = '2.15.10';
 
     if (apiVersion !== workerVersion) {
       throw new Error(`The API version "${apiVersion}" does not match ` + `the Worker version "${workerVersion}".`);
@@ -1752,7 +1752,7 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.isNodeJS = void 0;
-const isNodeJS = typeof process === "object" && process + "" === "[object process]" && !process.versions.nw && !(process.versions.electron && process.type && process.type !== "browser");
+const isNodeJS = typeof process === "object" && process + "" === "[object process]" && !process.versions.nw && !(process.versions.electron && process.type && process.type !== "browser") && process.argv0 !== "brightsign";
 exports.isNodeJS = isNodeJS;
 
 /***/ }),
@@ -26500,6 +26500,7 @@ class EvaluatorPreprocessor {
     });
     this.stateManager = stateManager;
     this.nonProcessedArgs = [];
+    this._isPathOp = false;
     this._numInvalidPathOPS = 0;
   }
 
@@ -26526,6 +26527,12 @@ class EvaluatorPreprocessor {
         const numArgs = opSpec.numArgs;
         let argsLength = args !== null ? args.length : 0;
 
+        if (!this._isPathOp) {
+          this._numInvalidPathOPS = 0;
+        }
+
+        this._isPathOp = fn >= _util.OPS.moveTo && fn <= _util.OPS.endPath;
+
         if (!opSpec.variableArgs) {
           if (argsLength !== numArgs) {
             const nonProcessedArgs = this.nonProcessedArgs;
@@ -26548,7 +26555,7 @@ class EvaluatorPreprocessor {
           if (argsLength < numArgs) {
             const partialMsg = `command ${cmd}: expected ${numArgs} args, ` + `but received ${argsLength} args.`;
 
-            if (fn >= _util.OPS.moveTo && fn <= _util.OPS.endPath && ++this._numInvalidPathOPS > EvaluatorPreprocessor.MAX_INVALID_PATH_OPS) {
+            if (this._isPathOp && ++this._numInvalidPathOPS > EvaluatorPreprocessor.MAX_INVALID_PATH_OPS) {
               throw new _util.FormatError(`Invalid ${partialMsg}`);
             }
 
@@ -74420,8 +74427,8 @@ Object.defineProperty(exports, "WorkerMessageHandler", ({
 
 var _worker = __w_pdfjs_require__(1);
 
-const pdfjsVersion = '2.14.305';
-const pdfjsBuild = 'eaaa8b4ad';
+const pdfjsVersion = '2.15.10';
+const pdfjsBuild = 'cc0ffd583';
 })();
 
 /******/ 	return __webpack_exports__;
