@@ -1287,7 +1287,7 @@ exports.isNodeJS = void 0;
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
-var isNodeJS = (typeof process === "undefined" ? "undefined" : _typeof(process)) === "object" && process + "" === "[object process]" && !process.versions.nw && !(process.versions.electron && process.type && process.type !== "browser") && !(window && window.BSDeviceInfo);
+var isNodeJS = (typeof process === "undefined" ? "undefined" : _typeof(process)) === "object" && process + "" === "[object process]" && !process.versions.nw && !(process.versions.electron && process.type && process.type !== "browser") && !(typeof window !== "undefined" && window && window.BSDeviceInfo);
 exports.isNodeJS = isNodeJS;
 
 /***/ }),
@@ -5869,7 +5869,7 @@ function _fetchDocument2() {
             _context7.next = 5;
             return worker.messageHandler.sendWithPromise("GetDocRequest", {
               docId: docId,
-              apiVersion: '2.15.12',
+              apiVersion: '2.15.13',
               source: {
                 data: source.data,
                 url: source.url,
@@ -8724,9 +8724,9 @@ var _canvasInUse = {
   writable: true,
   value: new WeakSet()
 };
-var version = '2.15.12';
+var version = '2.15.13';
 exports.version = version;
-var build = 'f892bc10d';
+var build = '29bcd7809';
 exports.build = build;
 
 /***/ }),
@@ -25399,8 +25399,8 @@ var _svg = __w_pdfjs_require__(181);
 
 var _xfa_layer = __w_pdfjs_require__(179);
 
-var pdfjsVersion = '2.15.12';
-var pdfjsBuild = 'f892bc10d';
+var pdfjsVersion = '2.15.13';
+var pdfjsBuild = '29bcd7809';
 {
   if (_is_node.isNodeJS) {
     var _require = __w_pdfjs_require__(182),

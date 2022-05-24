@@ -1079,7 +1079,7 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.isNodeJS = void 0;
-const isNodeJS = typeof process === "object" && process + "" === "[object process]" && !process.versions.nw && !(process.versions.electron && process.type && process.type !== "browser") && !(window && window.BSDeviceInfo);
+const isNodeJS = typeof process === "object" && process + "" === "[object process]" && !process.versions.nw && !(process.versions.electron && process.type && process.type !== "browser") && !(typeof window !== "undefined" && window && window.BSDeviceInfo);
 exports.isNodeJS = isNodeJS;
 
 /***/ }),
@@ -2439,7 +2439,7 @@ async function _fetchDocument(worker, source, pdfDataRangeTransport, docId) {
 
   const workerId = await worker.messageHandler.sendWithPromise("GetDocRequest", {
     docId,
-    apiVersion: '2.15.12',
+    apiVersion: '2.15.13',
     source: {
       data: source.data,
       url: source.url,
@@ -4572,9 +4572,9 @@ class InternalRenderTask {
 
 }
 
-const version = '2.15.12';
+const version = '2.15.13';
 exports.version = version;
-const build = 'f892bc10d';
+const build = '29bcd7809';
 exports.build = build;
 
 /***/ }),
@@ -17497,8 +17497,8 @@ var _svg = __w_pdfjs_require__(90);
 
 var _xfa_layer = __w_pdfjs_require__(88);
 
-const pdfjsVersion = '2.15.12';
-const pdfjsBuild = 'f892bc10d';
+const pdfjsVersion = '2.15.13';
+const pdfjsBuild = '29bcd7809';
 {
   if (_is_node.isNodeJS) {
     const {
